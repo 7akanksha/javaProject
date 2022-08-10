@@ -15,7 +15,7 @@ public interface DepartmentService {
 
 	Map<Object, Object> getDepartmentGroupByLocation();
 
-	Department saveDepartment(Department department);
+	String saveDepartment(Department department);
 
 	Department updateDepartment(long id, @Valid Department employee);
 

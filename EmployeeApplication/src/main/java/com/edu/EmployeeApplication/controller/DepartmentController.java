@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +31,8 @@ public class DepartmentController {
 	DepartmentService departmentService;
 	
 	@PostMapping
-	public ResponseEntity<Department> saveDepartment( @RequestBody Department department){
-		return new ResponseEntity<Department>(departmentService.saveDepartment(department), HttpStatus.CREATED);
+	public String saveDepartment( @RequestBody Department department, Authentication auth){
+		return departmentService.saveDepartment(department);
 	}
 	@GetMapping("/{id}")
 	public Department getDepartmentById(@PathVariable("id") long id) {

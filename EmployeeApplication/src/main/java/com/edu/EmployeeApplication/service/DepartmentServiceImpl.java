@@ -16,6 +16,7 @@ import com.edu.EmployeeApplication.entity.Employee;
 import com.edu.EmployeeApplication.exception.GivenIdNotFoundException;
 import com.edu.EmployeeApplication.exception.NoRecordFoundException;
 import com.edu.EmployeeApplication.exception.NoSuchRecordFoundException;
+import com.edu.EmployeeApplication.exception.RecordAlreadyExistException;
 import com.edu.EmployeeApplication.repository.DepartmentRepository;
 
 @Service
@@ -80,15 +81,38 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	@Override
-	public Department saveDepartment(Department department) {
+	public String saveDepartment(Department department) {
+		Optional<Department> dept = departmentRepository.findByDepartmentId(department.getDepartmentId());
+
+		if( dept.isPresent()) {
+			
+			throw new RecordAlreadyExistException();
+		}
+		else
+			departmentRepository.save(dept);
+		return "Record inserted successfully !";
+
 		
 		return departmentRepository.save(department);
 	}
 
 	@Override
-	public Department updateDepartment(long id, @Valid Department employee) {
-		// TODO Auto-generated method stub
-		return null;
+	public Department updateDepartment(long id, @Valid Department dept) {
+		
+		Department  d;
+		Optional<Department> currentDept = departmentRepository.findById(id);
+		if(currentDept.isPresent()) {
+			d = currentDept.get();
+			
+			d.setDepartmentId(dept.getDepartmentId());
+			d.setDepartmentName(dept.getDepartmentName());
+			d.setLocation(dept.getLocation());
+			
+			return departmentRepository.save(d);
+		}
+		else
+			throw new NoSuchRecordFoundException();
+		
 	}
 
 	@Override

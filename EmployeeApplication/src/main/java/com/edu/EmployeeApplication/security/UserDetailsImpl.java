@@ -11,57 +11,68 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.edu.EmployeeApplication.entity.Employee;
 
-public class UserDetailsImpl implements UserDetails {
-
+public class UserDetailsImpl implements UserDetails{
+	
 	private String email;
 	private String password;
-	private int active;
-	private List<GrantedAuthority> authorities;
+	private boolean active;
+	private List<GrantedAuthority> roles;
+	
+	
+	
+	public UserDetailsImpl() {
+	}
 
 	public UserDetailsImpl(Employee employee) {
 		this.email = employee.getEmail();
-		System.out.println(email);
 		this.password = employee.getPassword();
-		this.active = employee.getIsActive();
-		this.authorities=Arrays.stream(employee.getRole().split(","))
+		this.active = employee.isActive();
+		this.roles = Arrays.stream(employee.getRole().split(","))
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
+		// TODO Auto-generated method stub
+		return roles ;
 	}
 
 	@Override
 	public String getPassword() {
-		return password;
+		// TODO Auto-generated method stub
+		return password ;
 	}
 
 	@Override
 	public String getUsername() {
-		return email;
+		// TODO Auto-generated method stub
+		return email ;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return true;
-
+		// TODO Auto-generated method stub
+		return true ;
 	}
+	
 
 }

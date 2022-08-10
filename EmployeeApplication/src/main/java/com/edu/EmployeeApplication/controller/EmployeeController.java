@@ -26,24 +26,26 @@ import com.edu.EmployeeApplication.service.EmployeeService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin
 @RequestMapping("/api")
 public class EmployeeController {
 	
 	@Autowired
 	EmployeeService employeeService;
 	
+	
+
+@GetMapping("/auth")
+public Principal user(Principal user) {
+	return user;
+}
 	@PostMapping("/employee")
 	public String saveEmployee(@Valid @RequestBody Employee employee){
 		
 		return employeeService.saveEmployee(employee);
 	}
 	
-	@GetMapping("/auth")
-	public String login() {
-		return "Logged in successfully";
-	}
-
+	
 	@GetMapping("/employee")
 	public List<Employee> getEmployeeList(){
 		return employeeService.getEmployeeList();

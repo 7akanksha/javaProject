@@ -82,7 +82,7 @@ public class EmployeeServiceTests {
 		
 		// when - behavior that we are going test
 		
-		Employee savedEmployee = employeeService.saveEmployee(employee1);
+		String savedEmployee = employeeService.saveEmployee(employee1);
 		
 		System.out.println(savedEmployee);
 		assertThat(savedEmployee).isNotNull();

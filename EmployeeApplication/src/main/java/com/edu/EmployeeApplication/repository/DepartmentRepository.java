@@ -2,6 +2,7 @@ package com.edu.EmployeeApplication.repository;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +16,8 @@ public interface DepartmentRepository  extends JpaRepository<Department, Long>{
 
 	@Query("select count(e.id) from Employee e group by e.department.departmentId")
 	int[] getNumberOfEmployeesInDepartment();
+
+	Optional<Department> findByDepartmentId(String departmentId);
 	
 	
 	

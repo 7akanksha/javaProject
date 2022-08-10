@@ -48,11 +48,11 @@ public class Employee {
 	@Email(message = "Invalid email id")
 
 	private String email;
-	//@NotBlank(message = "Password is mandatory")
+	@NotBlank(message = "Password is mandatory")
 
 	private String password;
 	private String role;
-	private int isActive;
+	private boolean isActive;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -102,15 +102,13 @@ public class Employee {
 	public void setRole(String role) {
 		this.role = role;
 	}
-
-
-
 	
 	
-	public int getIsActive() {
+
+	public boolean isActive() {
 		return isActive;
 	}
-	public void setIsActive(int isActive) {
+	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 	public String getContactNo() {
